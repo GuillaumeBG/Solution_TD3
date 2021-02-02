@@ -15,16 +15,50 @@ namespace TD3
             Console.ReadKey();
         }
 
-        #region Traitemement d'image 
+        #region Traitemement d'image (TD3)
 
-        public MyImage NuanceDeGris(MyImage image)
+        public void NuanceDeGris(MyImage image)
         {
-                int[,][] matriceRGB = image.MatriceRGB;
+            int[,][] matriceRGB = image.MatriceRGB;
+            int moyenne =0;
+            for(int i=0;i<matriceRGB.GetLength(0);i++)
+            {
+                for(int j=0;j<matriceRGB.GetLength(1);j++)
+                {
+                    moyenne = (matriceRGB[i,j][0]+matriceRGB[i,j][1]+matriceRGB[i,j][2])/3;
+                    matriceRGB[i,j][0]=moyenne;
+                    matriceRGB[i,j][1]=moyenne;
+                    matriceRGB[i,j][2]=moyenne;
+                }
+            }
+            image.MatriceRGB = matriceRGB;
+        }
+        public void NoirEtBlanc(MyImage image,int valeur=128)
+        {
+            int[,][] matriceRGB = image.MatriceRGB;
+            for(int i=0;i<matriceRGB.GetLength(0);i++)
+            {
+                for(int j=0;j<matriceRGB.GetLength(1);j++)
+                {
+                    moyenne = (matriceRGB[i,j][0]+matriceRGB[i,j][1]+matriceRGB[i,j][2])/3;
+                    if(moyenne<valeur) moyenne=0;
+                    else moyenne=255;
+                    matriceRGB[i,j][0]=moyenne;
+                    matriceRGB[i,j][1]=moyenne;
+                    matriceRGB[i,j][2]=moyenne;
+                }
+            }
+            image.MatriceRGB = matriceRGB;
+        }
+
+        public void Miroir(MyImage image)
+        {
+            int[,][] matriceRGB = image.MatriceRGB;
         }
 
         #endregion
 
-        #region Filtre 
+        #region Filtre (TD4)
 
         #endregion
     }
