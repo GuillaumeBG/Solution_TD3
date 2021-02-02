@@ -12,3 +12,7 @@ C:\Users\guigu\OneDrive\Bureau\Projet Scientifique\Solution_TD4_git\TD3\obj\Debu
 C:\Users\guigu\OneDrive\Bureau\Projet Scientifique\Solution_TD4_git\TD3\obj\Debug\TD3.csproj.CoreCompileInputs.cache
 C:\Users\guigu\OneDrive\Bureau\Projet Scientifique\Solution_TD4_git\TD3\obj\Debug\TD3.exe
 C:\Users\guigu\OneDrive\Bureau\Projet Scientifique\Solution_TD4_git\TD3\obj\Debug\TD3.pdb
+F:\Esilv\A2-Semestre 2\algo\TD3\TD3\obj\Debug\TD3.csprojAssemblyReference.cache
+F:\Esilv\A2-Semestre 2\algo\TD3\TD3\obj\Debug\TD3.csproj.CoreCompileInputs.cache
+F:\Esilv\A2-Semestre 2\algo\TD3\TD3\obj\Debug\TD3.exe
+F:\Esilv\A2-Semestre 2\algo\TD3\TD3\obj\Debug\TD3.pdb

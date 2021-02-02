@@ -41,7 +41,7 @@ namespace TD3
         }
         public int[] Pixelrvb
         {
-            get { return this.r+this.v+this.b; }
+            get { int[] tab = new int[]{this.r,this.v,this.b}; return tab; }
             set { this.r = value[0];
                 this.v = value[1];
                 this.b = value[2];}
