@@ -17,9 +17,6 @@ namespace TD3
             string nom1 = Console.ReadLine();
             MyImage image = new MyImage(nom1);
             bool fin =true;
-            Console.WriteLine("Comment voulez-vous appelez votre nouvelle image ? (ex : ./Images/lac2.bmp)");
-            string nom3 = Console.ReadLine();
-            image.From_Image_To_File(nom3);
             while(fin==true)
             {
                 Console.WriteLine("Rentrez le nombre corespondant à l'action que vous voulez réaliser :\n1) Transformez votre image en Nuance De Gris\n2) Transformez votre image en Noir et Blanc\n3) Appliquez un effet miroir à votre image");
@@ -111,7 +108,7 @@ namespace TD3
             {
                 for(int j=0;j<matriceRGB.GetLength(1);j++)
                 {
-                    matriceRGBMiroir[i,j]=matriceRGB[matriceRGB.GetLength(0)-1-i,matriceRGB.GetLength(1)-1-j];
+                    matriceRGBMiroir[i,j]=matriceRGB[i,matriceRGB.GetLength(1)-1-j];
                 }
             }
             image.MatriceRGB = matriceRGBMiroir;
