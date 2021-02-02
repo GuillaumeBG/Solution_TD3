@@ -19,7 +19,12 @@ namespace TD3
             bool fin =true;
             while(fin==true)
             {
-                Console.WriteLine("Rentrez le nombre corespondant à l'action que vous voulez réaliser :\n1) Transformez votre image en Nuance De Gris\n2) Transformez votre image en Noir et Blanc\n3) Appliquez un effet miroir à votre image");
+                Console.WriteLine("Rentrez le nombre corespondant à l'action que vous voulez réaliser :\n" +
+                    "1) Transformez votre image en Nuance De Gris\n" +
+                    "2) Transformez votre image en Noir et Blanc\n" +
+                    "3) Appliquez un effet miroir à votre image\n" +
+                    "4) A Faire\n" +
+                    "5) Detection de contour\n");
                 int n=Convert.ToInt32(Console.ReadLine());
                 switch (n)
                 {
@@ -54,6 +59,14 @@ namespace TD3
                         Console.Clear();
                         Console.WriteLine("Votre image a été modifiée, souhaitez-vous continuer à modifier votre image ? (1 pour oui et 0 pour non)");
                         fin = Convert.ToBoolean(Convert.ToInt32(Console.ReadLine()));
+                        break;
+                    case 5:
+                        Console.Clear();
+                        Console.WriteLine("Nous allons appliquez un filtre pour faire ressortir les countours de l'image :");
+                        Filtre(image);
+                        Console.Clear();
+                        Console.WriteLine("Votre image a été modifiée, souhaitez-vous continuer à modifier votre image ? (1 pour oui et 0 pour non)");
+                        fin = Convert.ToBoolean(Console.ReadLine());
                         break;
                 }
             }
@@ -119,7 +132,7 @@ namespace TD3
         #region Filtre (TD4)
         public static MyImage Filtre(MyImage image)
         {
-            int[,][] matrice = new int[image.Largeur, image.Longueur][];
+            int[,][] matrice = image.MatriceRGB;
             int[,] matriceConvultion = new int[,] { { -1, 0, 1 }, { -1, 0, 1 }, { -1, 0, 1 } };
             int[,][] nouvelleMatrice = new int[matrice.GetLongLength(0), matrice.GetLongLength(1)][];
             int ligne2 = -1;
@@ -153,6 +166,7 @@ namespace TD3
                                 colonneMatriceInitial -= matrice.GetLength(1);
                             }
 
+                            nouvelleMatrice[i, j] = new int[3];
                             nouvelleMatrice[i, j][0] += matrice[ligneMatriceInitial, colonneMatriceInitial][0] * matriceConvultion[ligneConvulsion, colonneConvulsion];
                             nouvelleMatrice[i, j][1] += matrice[ligneMatriceInitial, colonneMatriceInitial][1] * matriceConvultion[ligneConvulsion, colonneConvulsion];
                             nouvelleMatrice[i, j][2] += matrice[ligneMatriceInitial, colonneMatriceInitial][2] * matriceConvultion[ligneConvulsion, colonneConvulsion];
