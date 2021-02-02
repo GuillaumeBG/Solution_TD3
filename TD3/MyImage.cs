@@ -27,7 +27,10 @@ namespace TD3
         {
             get { return this.longueur; }
         }
-
+        public byte[] Header
+        {
+            get { return this.header; }
+        }
         #endregion
 
         #region Constructeur de la classe MyImage
