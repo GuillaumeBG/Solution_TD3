@@ -203,6 +203,16 @@ namespace TD3
                 return tab;
             }
         }
+
+        public int[,][] Matrice
+        {
+            get { return this.matriceRGB; }
+        }
+        public void Matrice
+        {
+            set { this.matriceRGB=value; }
+        }
+
         #endregion
     }
 }

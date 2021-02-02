@@ -14,5 +14,14 @@ namespace TD3
             image.From_Image_To_File("./Images/File.bmp");
             Console.ReadKey();
         }
+
+        #region Traitemement d'image 
+
+        public MyImage NuanceDeGris(MyImage image)
+        {
+                
+        }
+
+        #endregion
     }
 }
