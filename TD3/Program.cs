@@ -64,7 +64,7 @@ namespace TD3
 
         #region Traitemement d'image (TD3)
 
-        public void NuanceDeGris(MyImage image)
+        public static void NuanceDeGris(MyImage image)
         {
             int[,][] matriceRGB = image.MatriceRGB;
             int moyenne =0;
@@ -80,9 +80,10 @@ namespace TD3
             }
             image.MatriceRGB = matriceRGB;
         }
-        public void NoirEtBlanc(MyImage image,int valeur=128)
+        public static void NoirEtBlanc(MyImage image,int valeur=128)
         {
             int[,][] matriceRGB = image.MatriceRGB;
+            int moyenne = 0;
             for(int i=0;i<matriceRGB.GetLength(0);i++)
             {
                 for(int j=0;j<matriceRGB.GetLength(1);j++)
@@ -98,7 +99,7 @@ namespace TD3
             image.MatriceRGB = matriceRGB;
         }
 
-        public void Miroir(MyImage image)
+        public static void Miroir(MyImage image)
         {
             int[,][] matriceRGB = image.MatriceRGB;
             int[,][] matriceRGBMiroir =matriceRGB;
