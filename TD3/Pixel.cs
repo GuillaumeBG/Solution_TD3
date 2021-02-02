@@ -3,7 +3,7 @@ using System.CodeDom;
 
 namespace TD3
 {
-    public class Pixel
+    class Pixel
     {
         #region Instance de la classe Pixel
         int r;

@@ -5,3 +5,10 @@ C:\Users\guigu\OneDrive\Bureau\Projet Scientifique\Solution_TD3_git\TD3\obj\Debu
 C:\Users\guigu\OneDrive\Bureau\Projet Scientifique\Solution_TD3_git\TD3\obj\Debug\TD3.csproj.CoreCompileInputs.cache
 C:\Users\guigu\OneDrive\Bureau\Projet Scientifique\Solution_TD3_git\TD3\obj\Debug\TD3.exe
 C:\Users\guigu\OneDrive\Bureau\Projet Scientifique\Solution_TD3_git\TD3\obj\Debug\TD3.pdb
+C:\Users\guigu\OneDrive\Bureau\Projet Scientifique\Solution_TD4_git\TD3\bin\Debug\TD3.exe.config
+C:\Users\guigu\OneDrive\Bureau\Projet Scientifique\Solution_TD4_git\TD3\bin\Debug\TD3.exe
+C:\Users\guigu\OneDrive\Bureau\Projet Scientifique\Solution_TD4_git\TD3\bin\Debug\TD3.pdb
+C:\Users\guigu\OneDrive\Bureau\Projet Scientifique\Solution_TD4_git\TD3\obj\Debug\TD3.csprojAssemblyReference.cache
+C:\Users\guigu\OneDrive\Bureau\Projet Scientifique\Solution_TD4_git\TD3\obj\Debug\TD3.csproj.CoreCompileInputs.cache
+C:\Users\guigu\OneDrive\Bureau\Projet Scientifique\Solution_TD4_git\TD3\obj\Debug\TD3.exe
+C:\Users\guigu\OneDrive\Bureau\Projet Scientifique\Solution_TD4_git\TD3\obj\Debug\TD3.pdb
