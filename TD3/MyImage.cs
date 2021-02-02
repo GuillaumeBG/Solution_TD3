@@ -18,6 +18,16 @@ namespace TD3
         int nombreBitsParPixel;
         int[,][] matriceRGB;
         byte[] header;
+
+        public int Largeur
+        {
+            get { return this.largeur; }
+        }
+        public int Longueur
+        {
+            get { return this.longueur; }
+        }
+
         #endregion
 
         #region Constructeur de la classe MyImage
