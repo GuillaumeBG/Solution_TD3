@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,7 @@ namespace TD3
                     "1) Transformez votre image en Nuance De Gris\n" +
                     "2) Transformez votre image en Noir et Blanc\n" +
                     "3) Appliquez un effet miroir à votre image\n" +
-                    "4) A Faire\n" +
+                    "4) Appliquer une rotation à l'image\n" +
                     "5) Detection de contour\n");
                 int n=Convert.ToInt32(Console.ReadLine());
                 switch (n)
@@ -60,6 +61,15 @@ namespace TD3
                         Console.WriteLine("Votre image a été modifiée, souhaitez-vous continuer à modifier votre image ? (1 pour oui et 0 pour non)");
                         fin = Convert.ToBoolean(Convert.ToInt32(Console.ReadLine()));
                         break;
+                    case 4:
+                        Console.Clear();
+                        Console.WriteLine("Nous allons faire tourner l'image selon un angle compris entre 0 et 360 :");
+                        int angle = Convert.ToInt32(Console.ReadLine());
+                        Rotation(image,angle);
+                        Console.Clear();
+                        Console.WriteLine("Votre image a été modifiée, souhaitez-vous continuer à modifier votre image ? (1 pour oui et 0 pour non)");
+                        fin = Convert.ToBoolean(Console.ReadLine());
+                        break;
                     case 5:
                         Console.Clear();
                         Console.WriteLine("Nous allons appliquez un filtre pour faire ressortir les countours de l'image :");
@@ -68,6 +78,7 @@ namespace TD3
                         Console.WriteLine("Votre image a été modifiée, souhaitez-vous continuer à modifier votre image ? (1 pour oui et 0 pour non)");
                         fin = Convert.ToBoolean(Console.ReadLine());
                         break;
+                     
                 }
             }
             Console.WriteLine("Comment voulez-vous appelez votre nouvelle image ? (ex : ./Images/lac2.bmp)");
@@ -116,7 +127,7 @@ namespace TD3
         public static void Miroir(MyImage image)
         {
             int[,][] matriceRGB = image.MatriceRGB;
-            int[,][] matriceRGBMiroir =matriceRGB;
+            int[,][] matriceRGBMiroir =new int[matriceRGB.GetLength(0),matriceRGB.GetLength(1)][];
             for(int i=0;i<matriceRGB.GetLength(0);i++)
             {
                 for(int j=0;j<matriceRGB.GetLength(1);j++)
@@ -125,6 +136,19 @@ namespace TD3
                 }
             }
             image.MatriceRGB = matriceRGBMiroir;
+        }
+
+        public static void Rotation(MyImage image, int angle)
+        {
+            int[,][] matriceRGB = image.MatriceRGB;
+            int[,][] matriceRGBMiroir =new int[matriceRGB.GetLength(0),matriceRGB.GetLength(1)][];
+            for(int i=0;i<matriceRGB.GetLength(0);i++)
+            {
+                for(int j=0;j<matriceRGB.GetLength(1);j++)
+                {
+                    matriceRGBMiroir[i,j]=new int[]{0,0,0};
+                }
+            }
         }
 
         #endregion
