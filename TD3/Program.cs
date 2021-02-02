@@ -11,16 +11,16 @@ namespace TD3
         static void Main(string[] args)
         {
             Console.ForegroundColor=ConsoleColor.DarkRed;
-            Console.ForegroundColor=ConsoleColor.DarkBlue;
             Console.WriteLine("Bienvenue dans le modfificateur d'image crée par Guillaume Bourg et Erwan-Henri Burlisson :");
+            Console.ForegroundColor=ConsoleColor.Blue;
             Console.WriteLine("Commençons par séléctionner l'image à modifier : (ex : ./Images/lac.bmp)");
             string nom1 = Console.ReadLine();
             MyImage image = new MyImage(nom1);
-            Console.WriteLine("Rentrez le nombre corespondant à l'action que vous voulez réaliser :\n1) Transformez votre image en Nuance De Gris\n2) Transformez votre image en Noir et Blanc\n3) Appliquez un effet miroir à votre image");
-            int n=Convert.ToInt32(Console.ReadLine());
-            bool fin =false;
-            while(fin==false)
+            bool fin =true;
+            while(fin==true)
             {
+                Console.WriteLine("Rentrez le nombre corespondant à l'action que vous voulez réaliser :\n1) Transformez votre image en Nuance De Gris\n2) Transformez votre image en Noir et Blanc\n3) Appliquez un effet miroir à votre image");
+                int n=Convert.ToInt32(Console.ReadLine());
                 switch (n)
                 {
                     case 1 :
@@ -29,7 +29,7 @@ namespace TD3
                         NuanceDeGris(image);
                         Console.Clear();
                         Console.WriteLine("Votre image a été modifiée, souhaitez-vous continuer à modifier votre image ? (1 pour oui et 0 pour non)");
-                        fin = Convert.ToBoolean(Console.ReadLine());
+                        fin = Convert.ToBoolean(Convert.ToInt32(Console.ReadLine()));
                         break;
                     case 2 :
                         Console.Clear();
