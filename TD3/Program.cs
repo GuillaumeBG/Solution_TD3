@@ -73,10 +73,10 @@ namespace TD3
                     case 5:
                         Console.Clear();
                         Console.WriteLine("Nous allons appliquez un filtre pour faire ressortir les countours de l'image :");
-                        Filtre(image);
+                        image = Filtre(image);
                         Console.Clear();
                         Console.WriteLine("Votre image a été modifiée, souhaitez-vous continuer à modifier votre image ? (1 pour oui et 0 pour non)");
-                        fin = Convert.ToBoolean(Console.ReadLine());
+                        fin = Convert.ToBoolean(Convert.ToInt32(Console.ReadLine()));
                         break;
                      
                 }
@@ -157,7 +157,7 @@ namespace TD3
         public static MyImage Filtre(MyImage image)
         {
             int[,][] matrice = image.MatriceRGB;
-            int[,] matriceConvultion = new int[,] { { -1, 0, 1 }, { -1, 0, 1 }, { -1, 0, 1 } };
+            int[,] matriceConvultion = new int[,] { { 0, 1, 0 }, { 1, 4, 1 }, { 0, 1, 0 } };
             int[,][] nouvelleMatrice = new int[matrice.GetLongLength(0), matrice.GetLongLength(1)][];
             int ligne2 = -1;
             int colonne2 = -1;
@@ -166,6 +166,7 @@ namespace TD3
             {
                 for (int j = 0; j < matrice.GetLength(1); j++)
                 {
+                    nouvelleMatrice[i, j] = new int[3];
                     for (int ligneConvulsion = 0; ligneConvulsion < 3; ligneConvulsion++)
                     {
                         for (int colonneConvulsion = 0; colonneConvulsion < 3; colonneConvulsion++)
@@ -190,7 +191,6 @@ namespace TD3
                                 colonneMatriceInitial -= matrice.GetLength(1);
                             }
 
-                            nouvelleMatrice[i, j] = new int[3];
                             nouvelleMatrice[i, j][0] += matrice[ligneMatriceInitial, colonneMatriceInitial][0] * matriceConvultion[ligneConvulsion, colonneConvulsion];
                             nouvelleMatrice[i, j][1] += matrice[ligneMatriceInitial, colonneMatriceInitial][1] * matriceConvultion[ligneConvulsion, colonneConvulsion];
                             nouvelleMatrice[i, j][2] += matrice[ligneMatriceInitial, colonneMatriceInitial][2] * matriceConvultion[ligneConvulsion, colonneConvulsion];
@@ -206,8 +206,8 @@ namespace TD3
                     colonne2 = -1;
                 }
             }
-            image = new MyImage(image.Header, nouvelleMatrice);
-            return image;
+            MyImage newImage = new MyImage(image.Header, nouvelleMatrice);
+            return newImage;
         }
         #endregion
     }
