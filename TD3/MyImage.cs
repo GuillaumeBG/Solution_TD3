@@ -58,7 +58,7 @@ namespace TD3
                 {
                     this.nombreBitsParPixel = Convertir_Endian_To_Int(myfile, 28, 2);
 
-                    this.matriceRGB = new int[this.largeur, this.longueur][];
+                    this.matriceRGB = new int[this.longueur, this.largeur][];
 
                     this.header = new byte[this.offset];
 
@@ -72,8 +72,8 @@ namespace TD3
                     int cpt = 0;
                     for (int i = this.offset; i < this.taille; i++)
                     {
-                        index1 = cpt % this.largeur;
-                        index2 = cpt / this.largeur;
+                        index2 = cpt % this.largeur;
+                        index1 = cpt / this.largeur;
                         this.matriceRGB[index1, index2] = new int[3];   //on definit le tableau RGB et on le remplit.
                         this.matriceRGB[index1, index2][0] = myfile[i];
                         i++;

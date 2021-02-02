@@ -17,6 +17,9 @@ namespace TD3
             string nom1 = Console.ReadLine();
             MyImage image = new MyImage(nom1);
             bool fin =true;
+            Console.WriteLine("Comment voulez-vous appelez votre nouvelle image ? (ex : ./Images/lac2.bmp)");
+            string nom3 = Console.ReadLine();
+            image.From_Image_To_File(nom3);
             while(fin==true)
             {
                 Console.WriteLine("Rentrez le nombre corespondant à l'action que vous voulez réaliser :\n" +
@@ -39,9 +42,9 @@ namespace TD3
                     case 2 :
                         Console.Clear();
                         Console.WriteLine("Nous allons modifier votre image en Noir et Blanc :");
-                        Console.WriteLine("Si vous voulez mettre une valeur seuil tapez 0 sinon tapez 1 :(valeur seuil par défault : 128");
-                        bool test = Convert.ToBoolean(Console.ReadLine());
-                        if (test==false)
+                        Console.WriteLine("Si vous voulez mettre une valeur seuil tapez 1 sinon tapez 0 :(valeur seuil par défault : 128)");
+                        bool test = Convert.ToBoolean(Convert.ToInt32(Console.ReadLine()));
+                        if (test==true)
                         {
                             Console.WriteLine("Rentrez la valeur seuil souhaitée :");
                             int valeur =Convert.ToInt32(Console.ReadLine());
@@ -50,7 +53,7 @@ namespace TD3
                         else NoirEtBlanc(image);
                         Console.Clear();
                         Console.WriteLine("Votre image a été modifiée, souhaitez-vous continuer à modifier votre image ? (1 pour oui et 0 pour non)");
-                        fin = Convert.ToBoolean(Console.ReadLine());
+                        fin = Convert.ToBoolean(Convert.ToInt32(Console.ReadLine()));
                         break;
                     case 3 :
                         Console.Clear();
@@ -58,7 +61,7 @@ namespace TD3
                         Miroir(image);
                         Console.Clear();
                         Console.WriteLine("Votre image a été modifiée, souhaitez-vous continuer à modifier votre image ? (1 pour oui et 0 pour non)");
-                        fin = Convert.ToBoolean(Console.ReadLine());
+                        fin = Convert.ToBoolean(Convert.ToInt32(Console.ReadLine()));
                         break;
                     case 5:
                         Console.Clear();
@@ -89,6 +92,7 @@ namespace TD3
                     matriceRGB[i,j][0]=moyenne;
                     matriceRGB[i,j][1]=moyenne;
                     matriceRGB[i,j][2]=moyenne;
+                    moyenne =0;
                 }
             }
             image.MatriceRGB = matriceRGB;
