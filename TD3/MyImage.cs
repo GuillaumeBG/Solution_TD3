@@ -204,12 +204,9 @@ namespace TD3
             }
         }
 
-        public int[,][] Matrice
+        public int[,][] MatriceRGB
         {
             get { return this.matriceRGB; }
-        }
-        public void Matrice
-        {
             set { this.matriceRGB=value; }
         }
 

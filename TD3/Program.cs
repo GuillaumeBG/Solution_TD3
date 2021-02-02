@@ -19,8 +19,12 @@ namespace TD3
 
         public MyImage NuanceDeGris(MyImage image)
         {
-                
+                int[,][] matriceRGB = image.MatriceRGB;
         }
+
+        #endregion
+
+        #region Filtre 
 
         #endregion
     }
