@@ -90,63 +90,63 @@ namespace TD3
 
         public static void NuanceDeGris(MyImage image)
         {
-            int[,][] matriceRGB = image.MatriceRGB;
+            int[,][] matriceBGR = image.MatriceBGR;
             int moyenne =0;
-            for(int i=0;i<matriceRGB.GetLength(0);i++)
+            for(int i=0;i<matriceBGR.GetLength(0);i++)
             {
-                for(int j=0;j<matriceRGB.GetLength(1);j++)
+                for(int j=0;j<matriceBGR.GetLength(1);j++)
                 {
-                    moyenne = (matriceRGB[i,j][0]+matriceRGB[i,j][1]+matriceRGB[i,j][2])/3;
-                    matriceRGB[i,j][0]=moyenne;
-                    matriceRGB[i,j][1]=moyenne;
-                    matriceRGB[i,j][2]=moyenne;
+                    moyenne = (matriceBGR[i,j][0]+matriceBGR[i,j][1]+matriceBGR[i,j][2])/3;
+                    matriceBGR[i,j][0]=moyenne;
+                    matriceBGR[i,j][1]=moyenne;
+                    matriceBGR[i,j][2]=moyenne;
                     moyenne =0;
                 }
             }
-            image.MatriceRGB = matriceRGB;
+            image.MatriceBGR = matriceBGR;
         }
         public static void NoirEtBlanc(MyImage image,int valeur=128)
         {
-            int[,][] matriceRGB = image.MatriceRGB;
+            int[,][] matriceBGR = image.MatriceBGR;
             int moyenne = 0;
-            for(int i=0;i<matriceRGB.GetLength(0);i++)
+            for(int i=0;i<matriceBGR.GetLength(0);i++)
             {
-                for(int j=0;j<matriceRGB.GetLength(1);j++)
+                for(int j=0;j<matriceBGR.GetLength(1);j++)
                 {
-                    moyenne = (matriceRGB[i,j][0]+matriceRGB[i,j][1]+matriceRGB[i,j][2])/3;
+                    moyenne = (matriceBGR[i,j][0]+matriceBGR[i,j][1]+matriceBGR[i,j][2])/3;
                     if(moyenne<valeur) moyenne=0;
                     else moyenne=255;
-                    matriceRGB[i,j][0]=moyenne;
-                    matriceRGB[i,j][1]=moyenne;
-                    matriceRGB[i,j][2]=moyenne;
+                    matriceBGR[i,j][0]=moyenne;
+                    matriceBGR[i,j][1]=moyenne;
+                    matriceBGR[i,j][2]=moyenne;
                 }
             }
-            image.MatriceRGB = matriceRGB;
+            image.MatriceBGR = matriceBGR;
         }
 
         public static void Miroir(MyImage image)
         {
-            int[,][] matriceRGB = image.MatriceRGB;
-            int[,][] matriceRGBMiroir =new int[matriceRGB.GetLength(0),matriceRGB.GetLength(1)][];
-            for(int i=0;i<matriceRGB.GetLength(0);i++)
+            int[,][] matriceBGR = image.MatriceBGR;
+            int[,][] matriceBGRMiroir =new int[matriceBGR.GetLength(0),matriceBGR.GetLength(1)][];
+            for(int i=0;i<matriceBGR.GetLength(0);i++)
             {
-                for(int j=0;j<matriceRGB.GetLength(1);j++)
+                for(int j=0;j<matriceBGR.GetLength(1);j++)
                 {
-                    matriceRGBMiroir[i,j]=matriceRGB[i,matriceRGB.GetLength(1)-1-j];
+                    matriceBGRMiroir[i,j]=matriceBGR[i,matriceBGR.GetLength(1)-1-j];
                 }
             }
-            image.MatriceRGB = matriceRGBMiroir;
+            image.MatriceBGR = matriceBGRMiroir;
         }
 
         public static void Rotation(MyImage image, int angle)
         {
-            int[,][] matriceRGB = image.MatriceRGB;
-            int[,][] matriceRGBMiroir =new int[matriceRGB.GetLength(0),matriceRGB.GetLength(1)][];
-            for(int i=0;i<matriceRGB.GetLength(0);i++)
+            int[,][] matriceBGR = image.MatriceBGR;
+            int[,][] matriceBGRMiroir =new int[matriceBGR.GetLength(0),matriceBGR.GetLength(1)][];
+            for(int i=0;i<matriceBGR.GetLength(0);i++)
             {
-                for(int j=0;j<matriceRGB.GetLength(1);j++)
+                for(int j=0;j<matriceBGR.GetLength(1);j++)
                 {
-                    matriceRGBMiroir[i,j]=new int[]{0,0,0};
+                    matriceBGRMiroir[i,j]=new int[]{0,0,0};
                 }
             }
         }
@@ -156,8 +156,9 @@ namespace TD3
         #region Filtre (TD4)
         public static MyImage Filtre(MyImage image)
         {
-            int[,][] matrice = image.MatriceRGB;
-            int[,] matriceConvultion = new int[,] { { 0, 1, 0 }, { 1, 4, 1 }, { 0, 1, 0 } };
+            NuanceDeGris(image);
+            int[,][] matrice = image.MatriceBGR;
+            int[,] matriceConvultion = new int[,] { { 0, 1, 0 }, { 1, -4, 1 }, { 0, 1, 0 } };
             int[,][] nouvelleMatrice = new int[matrice.GetLongLength(0), matrice.GetLongLength(1)][];
             int ligne2 = -1;
             int colonne2 = -1;
@@ -167,9 +168,9 @@ namespace TD3
                 for (int j = 0; j < matrice.GetLength(1); j++)
                 {
                     nouvelleMatrice[i, j] = new int[3];
-                    for (int ligneConvulsion = 0; ligneConvulsion < 3; ligneConvulsion++)
+                    for (int colonneConvulsion = 0; colonneConvulsion < 3; colonneConvulsion++)
                     {
-                        for (int colonneConvulsion = 0; colonneConvulsion < 3; colonneConvulsion++)
+                        for (int ligneConvulsion = 0; ligneConvulsion < 3; ligneConvulsion++)
                         {
                             int ligneMatriceInitial = i + ligne2;
                             int colonneMatriceInitial = j + colonne2;
@@ -199,9 +200,28 @@ namespace TD3
                         colonne2 = -1;
                         ligne2++;
                     }
-                    nouvelleMatrice[i, j][0] /= 9;
-                    nouvelleMatrice[i, j][1] /= 9;
-                    nouvelleMatrice[i, j][2] /= 9;
+
+                    if(nouvelleMatrice[i,j][0] < 0)
+                    {
+                        nouvelleMatrice[i, j][0] = 0;
+                    }else{
+                        //nouvelleMatrice[i, j][0] /= 5;
+                    }
+
+                    if (nouvelleMatrice[i, j][1] < 0)
+                    {
+                        nouvelleMatrice[i, j][1] = 0;
+                    }else{
+                        //nouvelleMatrice[i, j][1] /= 5;
+                    }
+
+                    if (nouvelleMatrice[i, j][2] < 0)
+                    {
+                        nouvelleMatrice[i, j][2] = 0;
+                    }else{
+                        //nouvelleMatrice[i, j][2] /= 5;
+                    }
+
                     ligne2 = -1;
                     colonne2 = -1;
                 }

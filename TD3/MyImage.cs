@@ -16,7 +16,7 @@ namespace TD3
         int largeur;
         int longueur;
         int nombreBitsParPixel;
-        int[,][] matriceRGB;
+        int[,][] matriceBGR;
         byte[] header;
 
         public int Largeur
@@ -58,7 +58,7 @@ namespace TD3
                 {
                     this.nombreBitsParPixel = Convertir_Endian_To_Int(myfile, 28, 2);
 
-                    this.matriceRGB = new int[this.longueur, this.largeur][];
+                    this.matriceBGR = new int[this.longueur, this.largeur][];
 
                     this.header = new byte[this.offset];
 
@@ -74,12 +74,12 @@ namespace TD3
                     {
                         index2 = cpt % this.largeur;
                         index1 = cpt / this.largeur;
-                        this.matriceRGB[index1, index2] = new int[3];   //on definit le tableau RGB et on le remplit.
-                        this.matriceRGB[index1, index2][0] = myfile[i];
+                        this.matriceBGR[index1, index2] = new int[3];   //on definit le tableau RGB et on le remplit.
+                        this.matriceBGR[index1, index2][0] = myfile[i];
                         i++;
-                        this.matriceRGB[index1, index2][1] = myfile[i];
+                        this.matriceBGR[index1, index2][1] = myfile[i];
                         i++;
-                        this.matriceRGB[index1, index2][2] = myfile[i];
+                        this.matriceBGR[index1, index2][2] = myfile[i];
                         cpt++;
                     }
                 }
@@ -110,15 +110,15 @@ namespace TD3
                     this.nombreBitsParPixel = Convertir_Endian_To_Int(header, 28, 2);
                 }
             }
-            this.matriceRGB = new int[this.largeur, this.longueur][];
+            this.matriceBGR = new int[this.largeur, this.longueur][];
         }
 
         /// <summary>
         /// Constructeur de la classe Image à partir d'un header et d'une matrice de pixels RGB
         /// </summary>
         /// <param name="header"></param>
-        /// <param name="matriceRGB"></param>
-        public MyImage(byte[] header, int[,][] matriceRGB)
+        /// <param name="matriceBGR"></param>
+        public MyImage(byte[] header, int[,][] matriceBGR)
         {
             this.header = header;
             if (header[0] == 66 && header[1] == 77)
@@ -138,7 +138,7 @@ namespace TD3
                     this.nombreBitsParPixel = Convertir_Endian_To_Int(header, 28, 2);
                 }
             }
-            this.matriceRGB = matriceRGB;
+            this.matriceBGR = matriceBGR;
         }
 
         #endregion
@@ -157,13 +157,13 @@ namespace TD3
                 bytes[index] = this.header[i];
                 index++;
             }
-            for (int i = 0; i < this.matriceRGB.GetLength(0); i++)
+            for (int i = 0; i < this.matriceBGR.GetLength(0); i++)
             {
-                for (int j = 0; j < this.matriceRGB.GetLength(1); j++)
+                for (int j = 0; j < this.matriceBGR.GetLength(1); j++)
                 {
                     for (int a = 0; a < 3; a++)
                     {
-                        bytes[index] = Convert.ToByte(matriceRGB[i, j][a]);
+                        bytes[index] = Convert.ToByte(matriceBGR[i, j][a]);
                         index++;
                     }
                 }
@@ -217,10 +217,10 @@ namespace TD3
             }
         }
 
-        public int[,][] MatriceRGB
+        public int[,][] MatriceBGR
         {
-            get { return this.matriceRGB; }
-            set { this.matriceRGB=value; }
+            get { return this.matriceBGR; }
+            set { this.matriceBGR=value; }
         }
 
         #endregion

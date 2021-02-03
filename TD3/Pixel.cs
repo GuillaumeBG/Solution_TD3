@@ -16,9 +16,9 @@ namespace TD3
         {
             if (tab.Length==3)
             {
-                this.r = tab[0];
+                this.r = tab[2];
                 this.v = tab[1];
-                this.b = tab[2];
+                this.b = tab[0];
             }
         }
         #endregion
@@ -42,9 +42,9 @@ namespace TD3
         public int[] Pixelrvb
         {
             get { int[] tab = new int[]{this.r,this.v,this.b}; return tab; }
-            set { this.r = value[0];
+            set { this.r = value[2];
                 this.v = value[1];
-                this.b = value[2];}
+                this.b = value[0];}
         }
         #endregion
     }
