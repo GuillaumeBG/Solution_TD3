@@ -16,7 +16,7 @@ namespace TD3
         int largeur;
         int longueur;
         int nombreBitsParPixel;
-        int[,][] matriceBGR;
+        Pixel[,] matriceBGR;
         byte[] header;
 
         public int Largeur
@@ -70,16 +70,13 @@ namespace TD3
                     int index1 = 0;     // premier parametre de la marice
                     int index2 = 0;     // premier parametre de la marice
                     int cpt = 0;
-                    for (int i = this.offset; i < this.taille; i++)
+                    for (int i = this.offset; i < this.taille; i=i+2)
                     {
                         index2 = cpt % this.largeur;
                         index1 = cpt / this.largeur;
-                        this.matriceBGR[index1, index2] = new int[3];   //on definit le tableau RGB et on le remplit.
-                        this.matriceBGR[index1, index2][0] = myfile[i];
-                        i++;
-                        this.matriceBGR[index1, index2][1] = myfile[i];
-                        i++;
-                        this.matriceBGR[index1, index2][2] = myfile[i];
+                        this.matriceBGR[index1, index2] = new Pixel[];   //on definit le tableau RGB et on le remplit.
+                        Pixel temp = Pixel(myfile[i],myfile[i+1],myfile[i+2]);
+                        this.matriceBGR[index1,index2]=temp;
                         cpt++;
                     }
                 }
@@ -217,7 +214,7 @@ namespace TD3
             }
         }
 
-        public int[,][] MatriceBGR
+        public Pixel[,][] MatriceBGR
         {
             get { return this.matriceBGR; }
             set { this.matriceBGR=value; }

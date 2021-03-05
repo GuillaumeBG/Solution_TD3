@@ -9,16 +9,18 @@ namespace TD3
         int r;
         int v;
         int b;
+        bool noir;
         #endregion
 
         #region Constructeur de la classe Pixel
-        public Pixel(int[] tab)
+        public Pixel(int[] tab,bool noir=false)
         {
             if (tab.Length==3)
             {
                 this.r = tab[2];
                 this.v = tab[1];
                 this.b = tab[0];
+                this.noir = noir;
             }
         }
         #endregion
@@ -45,6 +47,11 @@ namespace TD3
             set { this.r = value[2];
                 this.v = value[1];
                 this.b = value[0];}
+        }
+        public bool PixelNoir
+        {
+            get { return this.noir; }
+            set { this.noir = value; }
         }
         #endregion
     }

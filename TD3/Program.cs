@@ -149,16 +149,16 @@ namespace TD3
 
         public static void NuanceDeGris(MyImage image)
         {
-            int[,][] matriceBGR = image.MatriceBGR;
+            Pixel[,] matriceBGR = image.MatriceBGR;
             int moyenne =0;
             for(int i=0;i<matriceBGR.GetLength(0);i++)
             {
                 for(int j=0;j<matriceBGR.GetLength(1);j++)
                 {
-                    moyenne = (matriceBGR[i,j][0]+matriceBGR[i,j][1]+matriceBGR[i,j][2])/3;
-                    matriceBGR[i,j][0]=moyenne;
-                    matriceBGR[i,j][1]=moyenne;
-                    matriceBGR[i,j][2]=moyenne;
+                    moyenne = (matriceBGR[i,j].Pixelr+matriceBGR[i,j].Pixelv+matriceBGR[i,j].Pixelb)/3;
+                    matriceBGR[i,j].Pixelr=moyenne;
+                    matriceBGR[i,j].Pixelv=moyenne;
+                    matriceBGR[i,j].Pixelb=moyenne;
                     moyenne =0;
                 }
             }
@@ -166,18 +166,18 @@ namespace TD3
         }
         public static void NoirEtBlanc(MyImage image,int valeur=128)
         {
-            int[,][] matriceBGR = image.MatriceBGR;
+            Pixel[,] matriceBGR = image.MatriceBGR;
             int moyenne = 0;
             for(int i=0;i<matriceBGR.GetLength(0);i++)
             {
                 for(int j=0;j<matriceBGR.GetLength(1);j++)
                 {
-                    moyenne = (matriceBGR[i,j][0]+matriceBGR[i,j][1]+matriceBGR[i,j][2])/3;
+                    moyenne = (matriceBGR[i,j].Pixelr+matriceBGR[i,j].Pixelv+matriceBGR[i,j].Pixelb)/3;
                     if(moyenne<valeur) moyenne=0;
                     else moyenne=255;
-                    matriceBGR[i,j][0]=moyenne;
-                    matriceBGR[i,j][1]=moyenne;
-                    matriceBGR[i,j][2]=moyenne;
+                    matriceBGR[i,j].pixelr=moyenne;
+                    matriceBGR[i,j].pixelv=moyenne;
+                    matriceBGR[i,j].pixelb=moyenne;
                 }
             }
             image.MatriceBGR = matriceBGR;
@@ -185,8 +185,8 @@ namespace TD3
 
         public static void Miroir(MyImage image)
         {
-            int[,][] matriceBGR = image.MatriceBGR;
-            int[,][] matriceBGRMiroir =new int[matriceBGR.GetLength(0),matriceBGR.GetLength(1)][];
+            Pixel[,] matriceBGR = image.MatriceBGR;
+            Pixel[,] matriceBGRMiroir =new int[matriceBGR.GetLength(0),matriceBGR.GetLength(1)][];
             for(int i=0;i<matriceBGR.GetLength(0);i++)
             {
                 for(int j=0;j<matriceBGR.GetLength(1);j++)
@@ -199,13 +199,17 @@ namespace TD3
 
         public static void Rotation(MyImage image, int angle)
         {
-            int[,][] matriceBGR = image.MatriceBGR;
-            int[,][] matriceBGRRotation =new int[matriceBGR.GetLength(0),matriceBGR.GetLength(1)][];
+            Pixel[,] matriceBGR = image.MatriceBGR;
+            Pixel[,] matriceBGRRotation =new int[matriceBGR.GetLength(0),matriceBGR.GetLength(1)][];
             for(int i=0;i<matriceBGRRotation.GetLength(0);i++)
             {
                 for(int j=0;j<matriceBGRRotation.GetLength(1);j++)
                 {
                     matriceBGRRotation[i,j]=new int[3];
+                    if(matriceBGR[i,j].PixelNoir!=true)
+                    {
+                        matriceBGRMiroir[i,j]=matriceBGR[i,matriceBGR.GetLength(1)-1-j];
+                    }
                 }
             }
             image.MatriceBGR=matriceBGRRotation;
