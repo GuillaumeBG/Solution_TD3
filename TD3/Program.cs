@@ -201,13 +201,14 @@ namespace TD3
         {
             int[,][] matriceBGR = image.MatriceBGR;
             int[,][] matriceBGRRotation =new int[matriceBGR.GetLength(0),matriceBGR.GetLength(1)][];
-            for(int i=0;i<matriceBGR.GetLength(0);i++)
+            for(int i=0;i<matriceBGRRotation.GetLength(0);i++)
             {
-                for(int j=0;j<matriceBGR.GetLength(1);j++)
+                for(int j=0;j<matriceBGRRotation.GetLength(1);j++)
                 {
-                    matriceBGRMiroir[i,j]=new int[3];
+                    matriceBGRRotation[i,j]=new int[3];
                 }
             }
+            image.MatriceBGR=matriceBGRRotation;
         }
 
         #endregion
