@@ -49,8 +49,6 @@ namespace TD3
                             File.Delete("./temp.bmp");
                             afficher=false;
                         }
-                        Console.WriteLine("Souhaitez-vous continuer à modifier votre image ? (1 pour oui et 0 pour non)");
-                        fin = Convert.ToBoolean(Convert.ToInt32(Console.ReadLine()));
                         break;
                     case 2 :
                         Console.Clear();
@@ -76,8 +74,6 @@ namespace TD3
                             File.Delete("./temp.bmp");
                             afficher=false;
                         }
-                        Console.WriteLine("Souhaitez-vous continuer à modifier votre image ? (1 pour oui et 0 pour non)");
-                        fin = Convert.ToBoolean(Convert.ToInt32(Console.ReadLine()));
                         break;
                     case 3 :
                         Console.Clear();
@@ -95,8 +91,6 @@ namespace TD3
                             File.Delete("./temp.bmp");
                             afficher=false;
                         }
-                        Console.WriteLine("Souhaitez-vous continuer à modifier votre image ? (1 pour oui et 0 pour non)");
-                        fin = Convert.ToBoolean(Convert.ToInt32(Console.ReadLine()));
                         break;
                     case 4:
                         Console.Clear();
@@ -115,13 +109,11 @@ namespace TD3
                             File.Delete("./temp.bmp");
                             afficher=false;
                         }
-                        Console.WriteLine("Souhaitez-vous continuer à modifier votre image ? (1 pour oui et 0 pour non)");
-                        fin = Convert.ToBoolean(Console.ReadLine());
                         break;
                     case 5:
                         Console.Clear();
                         Console.WriteLine("Nous allons appliquez un filtre pour faire ressortir les countours de l'image :");
-                        image = Filtre.Convolution(image,1);
+                        image = Filtre.Convolution(image,3);
                         Console.Clear();
                         Console.WriteLine("Votre image a été modifiée, souhaitez vous l'afficher ?(1 pour oui et 0 pour non)");
                         afficher = Convert.ToBoolean(Convert.ToInt32(Console.ReadLine()));
@@ -134,11 +126,10 @@ namespace TD3
                             File.Delete("./temp.bmp");
                             afficher=false;
                         }
-                        Console.WriteLine("Souhaitez-vous continuer à modifier votre image ? (1 pour oui et 0 pour non)");
-                        fin = Convert.ToBoolean(Convert.ToInt32(Console.ReadLine()));
                         break;
-                     
                 }
+                Console.WriteLine("Souhaitez-vous continuer à modifier votre image ? (1 pour oui et 0 pour non)");
+                fin = Convert.ToBoolean(Convert.ToInt32(Console.ReadLine()));
             }
             Console.WriteLine("Comment voulez-vous appelez votre nouvelle image ? (ex : ./Images/lac2.bmp)");
             string nom2 = Console.ReadLine();

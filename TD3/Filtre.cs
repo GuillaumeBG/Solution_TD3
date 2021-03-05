@@ -21,7 +21,7 @@ namespace TD3
                     matriceConvultion = new int[,] { { 0, 0, 0 }, { -1, 1, 0 }, { 0, 0, 0 } };
                     break;
                 case 3: //flou
-                    matriceConvultion = new int[,] { { 0, 0, 0, 0, 0 }, { 0, -1, 1, 0, 0 }, { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 } };
+                    matriceConvultion = new int[,] { { 0, 0, 0, 0, 0 }, { 0, 1, 1, 1, 0 }, { 0, 1, 1, 0, 0 }, { 0, 1, 1, 1, 0 }, { 0, 1, 1, 1, 0 } };
                     break;
                 case 4: //repoussage
                     matriceConvultion = new int[,] { { -2, -1, 0 }, { -1, 1, 1 }, { 0, 0, 0 } };
