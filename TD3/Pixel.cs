@@ -23,25 +23,32 @@ namespace TD3
                 this.noir = noir;
             }
         }
+        public Pixel(int r,int v,int b, bool noir = false)
+        {
+            this.r = r;
+            this.v = v;
+            this.b = b;
+            this.noir = noir;
+        }
         #endregion
 
         #region Methode 
-        public int Pixelr
+        public int R
         {
             get { return this.r; }
             set { this.r = value; }
         }
-        public int Pixelv
+        public int V
         {
             get { return this.v; }
             set { this.v = value; }
         }
-        public int Pixelb
+        public int B
         {
             get { return this.b; }
             set { this.b = value; }
         }
-        public int[] Pixelrvb
+        public int[] RVB
         {
             get { int[] tab = new int[]{this.r,this.v,this.b}; return tab; }
             set { this.r = value[2];

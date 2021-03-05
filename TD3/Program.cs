@@ -146,10 +146,10 @@ namespace TD3
             {
                 for(int j=0;j<matriceBGR.GetLength(1);j++)
                 {
-                    moyenne = (matriceBGR[i,j].Pixelr+matriceBGR[i,j].Pixelv+matriceBGR[i,j].Pixelb)/3;
-                    matriceBGR[i,j].Pixelr=moyenne;
-                    matriceBGR[i,j].Pixelv=moyenne;
-                    matriceBGR[i,j].Pixelb=moyenne;
+                    moyenne = (matriceBGR[i,j].R+matriceBGR[i,j].V+matriceBGR[i,j].B)/3;
+                    matriceBGR[i,j].R=moyenne;
+                    matriceBGR[i,j].V=moyenne;
+                    matriceBGR[i,j].B=moyenne;
                     moyenne =0;
                 }
             }
@@ -163,12 +163,12 @@ namespace TD3
             {
                 for(int j=0;j<matriceBGR.GetLength(1);j++)
                 {
-                    moyenne = (matriceBGR[i,j].Pixelr+matriceBGR[i,j].Pixelv+matriceBGR[i,j].Pixelb)/3;
+                    moyenne = (matriceBGR[i,j].R+matriceBGR[i,j].V+matriceBGR[i,j].B)/3;
                     if(moyenne<valeur) moyenne=0;
                     else moyenne=255;
-                    matriceBGR[i,j].pixelr=moyenne;
-                    matriceBGR[i,j].pixelv=moyenne;
-                    matriceBGR[i,j].pixelb=moyenne;
+                    matriceBGR[i,j].R=moyenne;
+                    matriceBGR[i,j].V=moyenne;
+                    matriceBGR[i,j].B=moyenne;
                 }
             }
             image.MatriceBGR = matriceBGR;
@@ -177,7 +177,7 @@ namespace TD3
         public static void Miroir(MyImage image)
         {
             Pixel[,] matriceBGR = image.MatriceBGR;
-            Pixel[,] matriceBGRMiroir =new int[matriceBGR.GetLength(0),matriceBGR.GetLength(1)][];
+            Pixel[,] matriceBGRMiroir = new Pixel[matriceBGR.GetLength(0),matriceBGR.GetLength(1)];
             for(int i=0;i<matriceBGR.GetLength(0);i++)
             {
                 for(int j=0;j<matriceBGR.GetLength(1);j++)
@@ -191,19 +191,27 @@ namespace TD3
         public static void Rotation(MyImage image, int angle)
         {
             Pixel[,] matriceBGR = image.MatriceBGR;
-            Pixel[,] matriceBGRRotation =new int[matriceBGR.GetLength(0),matriceBGR.GetLength(1)][];
-            for(int i=0;i<matriceBGRRotation.GetLength(0);i++)
+            double longueur = Math.Ceiling(Math.Sin(angle) * matriceBGR.GetLength(0) + Math.Cos(angle) * matriceBGR.GetLength(1));
+            double largeur = Math.Ceiling(Math.Cos(angle) * matriceBGR.GetLength(0) + Math.Sin(angle) * matriceBGR.GetLength(1));
+            Pixel[,] matriceBGRRotation = new Pixel[Convert.ToInt32(Math.Abs(longueur)), Convert.ToInt32(Math.Abs(largeur))];
+            for (int i = 0; i < matriceBGRRotation.GetLength(0); i++)
             {
-                for(int j=0;j<matriceBGRRotation.GetLength(1);j++)
+                for (int j = 0; j < matriceBGRRotation.GetLength(1); j++)
                 {
-                    matriceBGRRotation[i,j]=new int[3];
-                    if(matriceBGR[i,j].PixelNoir!=true)
+                    matriceBGRRotation[i, j] = new Pixel(0, 0, 0, true);
+                }
+            }
+            for (int i = 0; i < matriceBGR.GetLength(0); i++)
+            {
+                for (int j = 0; j < matriceBGR.GetLength(1); j++)
+                {
+                    if (matriceBGR[i, j].PixelNoir != true)
                     {
-                        matriceBGRMiroir[i,j]=matriceBGR[i,matriceBGR.GetLength(1)-1-j];
+                        matriceBGRRotation[Convert.ToInt32(Math.Abs(Math.Ceiling(Math.Sin(angle) * i + Math.Cos(angle) * j))), Convert.ToInt32(Math.Abs(Math.Ceiling(Math.Cos(angle) * i + Math.Sin(angle) * j)))] = matriceBGR[i, j];
                     }
                 }
             }
-            image.MatriceBGR=matriceBGRRotation;
+            image.MatriceBGR = matriceBGRRotation;
         }
 
         #endregion

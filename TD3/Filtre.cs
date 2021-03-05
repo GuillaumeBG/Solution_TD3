@@ -28,9 +28,9 @@ namespace TD3
                     break;
             }
             //NuanceDeGris(image);
-            int[,][] matrice = image.MatriceBGR;
+            Pixel[,] matrice = image.MatriceBGR;
             
-            int[,][] nouvelleMatrice = new int[matrice.GetLongLength(0), matrice.GetLongLength(1)][];
+            Pixel[,] nouvelleMatrice = new Pixel[matrice.GetLongLength(0), matrice.GetLongLength(1)];
             int ligne2 = -matriceConvultion.GetLength(0) / 2;
             int colonne2 = -matriceConvultion.GetLength(1) / 2;
 
@@ -38,7 +38,7 @@ namespace TD3
             {
                 for (int j = 0; j < matrice.GetLength(1); j++)
                 {
-                    nouvelleMatrice[i, j] = new int[3];
+                    nouvelleMatrice[i, j] = new Pixel(0,0,0);
                     for (int colonneConvulsion = 0; colonneConvulsion < matriceConvultion.GetLength(0); colonneConvulsion++)
                     {
                         for (int ligneConvulsion = 0; ligneConvulsion < matriceConvultion.GetLength(1); ligneConvulsion++)
@@ -63,40 +63,40 @@ namespace TD3
                                 colonneMatriceInitial -= matrice.GetLength(1);
                             }
 
-                            nouvelleMatrice[i, j][0] += matrice[ligneMatriceInitial, colonneMatriceInitial][0] * matriceConvultion[ligneConvulsion, colonneConvulsion];
-                            nouvelleMatrice[i, j][1] += matrice[ligneMatriceInitial, colonneMatriceInitial][1] * matriceConvultion[ligneConvulsion, colonneConvulsion];
-                            nouvelleMatrice[i, j][2] += matrice[ligneMatriceInitial, colonneMatriceInitial][2] * matriceConvultion[ligneConvulsion, colonneConvulsion];
+                            nouvelleMatrice[i, j].B += matrice[ligneMatriceInitial, colonneMatriceInitial].B * matriceConvultion[ligneConvulsion, colonneConvulsion];
+                            nouvelleMatrice[i, j].V += matrice[ligneMatriceInitial, colonneMatriceInitial].V * matriceConvultion[ligneConvulsion, colonneConvulsion];
+                            nouvelleMatrice[i, j].R += matrice[ligneMatriceInitial, colonneMatriceInitial].R * matriceConvultion[ligneConvulsion, colonneConvulsion];
                             colonne2++;
                         }
                         colonne2 = -matriceConvultion.GetLength(1) / 2;
                         ligne2++;
                     }
 
-                    if (nouvelleMatrice[i, j][0] < 0)
+                    if (nouvelleMatrice[i, j].B < 0)
                     {
-                        nouvelleMatrice[i, j][0] = 0;
+                        nouvelleMatrice[i, j].B = 0;
                     }
-                    else if (nouvelleMatrice[i, j][0] > 255)
+                    else if (nouvelleMatrice[i, j].B > 255)
                     {
-                        nouvelleMatrice[i, j][0] = 255;
-                    }
-
-                    if (nouvelleMatrice[i, j][1] < 0)
-                    {
-                        nouvelleMatrice[i, j][1] = 0;
-                    }
-                    else if (nouvelleMatrice[i, j][1] > 255)
-                    {
-                        nouvelleMatrice[i, j][1] = 255;
+                        nouvelleMatrice[i, j].B = 255;
                     }
 
-                    if (nouvelleMatrice[i, j][2] < 0)
+                    if (nouvelleMatrice[i, j].V < 0)
                     {
-                        nouvelleMatrice[i, j][2] = 0;
+                        nouvelleMatrice[i, j].V = 0;
                     }
-                    else if (nouvelleMatrice[i, j][2] > 255)
+                    else if (nouvelleMatrice[i, j].V > 255)
                     {
-                        nouvelleMatrice[i, j][2] = 255;
+                        nouvelleMatrice[i, j].V = 255;
+                    }
+
+                    if (nouvelleMatrice[i, j].R < 0)
+                    {
+                        nouvelleMatrice[i, j].R = 0;
+                    }
+                    else if (nouvelleMatrice[i, j].R > 255)
+                    {
+                        nouvelleMatrice[i, j].R = 255;
                     }
 
                     ligne2 = -matriceConvultion.GetLength(0) / 2;

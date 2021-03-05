@@ -58,7 +58,7 @@ namespace TD3
                 {
                     this.nombreBitsParPixel = Convertir_Endian_To_Int(myfile, 28, 2);
 
-                    this.matriceBGR = new int[this.longueur, this.largeur][];
+                    this.matriceBGR = new Pixel[this.longueur, this.largeur];
 
                     this.header = new byte[this.offset];
 
@@ -70,12 +70,11 @@ namespace TD3
                     int index1 = 0;     // premier parametre de la marice
                     int index2 = 0;     // premier parametre de la marice
                     int cpt = 0;
-                    for (int i = this.offset; i < this.taille; i=i+2)
+                    for (int i = this.offset; i < this.taille; i+=3)
                     {
                         index2 = cpt % this.largeur;
                         index1 = cpt / this.largeur;
-                        this.matriceBGR[index1, index2] = new Pixel[];   //on definit le tableau RGB et on le remplit.
-                        Pixel temp = Pixel(myfile[i],myfile[i+1],myfile[i+2]);
+                        Pixel temp = new Pixel(myfile[i+2],myfile[i+1],myfile[i]);
                         this.matriceBGR[index1,index2]=temp;
                         cpt++;
                     }
@@ -107,7 +106,7 @@ namespace TD3
                     this.nombreBitsParPixel = Convertir_Endian_To_Int(header, 28, 2);
                 }
             }
-            this.matriceBGR = new int[this.largeur, this.longueur][];
+            this.matriceBGR = new Pixel[this.largeur, this.longueur];
         }
 
         /// <summary>
@@ -115,7 +114,7 @@ namespace TD3
         /// </summary>
         /// <param name="header"></param>
         /// <param name="matriceBGR"></param>
-        public MyImage(byte[] header, int[,][] matriceBGR)
+        public MyImage(byte[] header, Pixel[,] matriceBGR)
         {
             this.header = header;
             if (header[0] == 66 && header[1] == 77)
@@ -160,7 +159,9 @@ namespace TD3
                 {
                     for (int a = 0; a < 3; a++)
                     {
-                        bytes[index] = Convert.ToByte(matriceBGR[i, j][a]);
+                        bytes[index] = Convert.ToByte(matriceBGR[i, j].B);
+                        bytes[index] = Convert.ToByte(matriceBGR[i, j].V);
+                        bytes[index] = Convert.ToByte(matriceBGR[i, j].R);
                         index++;
                     }
                 }
@@ -214,7 +215,7 @@ namespace TD3
             }
         }
 
-        public Pixel[,][] MatriceBGR
+        public Pixel[,] MatriceBGR
         {
             get { return this.matriceBGR; }
             set { this.matriceBGR=value; }
