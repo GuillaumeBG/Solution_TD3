@@ -22,3 +22,6 @@ F:\Esilv\A2-Semestre 2\algo\TD3\TD3\bin\Debug\TD3.pdb
 C:\Users\erheb\Source\Repos\Solution_TD3\TD3\obj\Debug\TD3.csprojAssemblyReference.cache
 C:\Users\erheb\Source\Repos\Solution_TD3\TD3\obj\Debug\TD3.exe
 C:\Users\erheb\Source\Repos\Solution_TD3\TD3\obj\Debug\TD3.pdb
+C:\Users\erheb\Source\Repos\Solution_TD3\TD3\bin\Debug\TD3.exe.config
+C:\Users\erheb\Source\Repos\Solution_TD3\TD3\bin\Debug\TD3.exe
+C:\Users\erheb\Source\Repos\Solution_TD3\TD3\bin\Debug\TD3.pdb
