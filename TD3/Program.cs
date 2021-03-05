@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace TD3
 {
@@ -18,6 +19,7 @@ namespace TD3
             string nom1 = Console.ReadLine();
             MyImage image = new MyImage(nom1);
             bool fin =true;
+            bool afficher=false;
             while(fin==true)
             {
                 Console.WriteLine("Rentrez le nombre corespondant à l'action que vous voulez réaliser :\n" +
@@ -34,7 +36,18 @@ namespace TD3
                         Console.WriteLine("Nous allons modifier votre image en nuance de gris :");
                         NuanceDeGris(image);
                         Console.Clear();
-                        Console.WriteLine("Votre image a été modifiée, souhaitez-vous continuer à modifier votre image ? (1 pour oui et 0 pour non)");
+                        Console.WriteLine("Votre image a été modifiée, souhaitez vous l'afficher ?(1 pour oui et 0 pour non)");
+                        afficher = Convert.ToBoolean(Convert.ToInt32(Console.ReadLine()));
+                        if (afficher==true)
+                        {
+                            image.From_Image_To_File("./temp.bmp");
+                            Process.Start("./temp.bmp");
+                            Console.WriteLine("Appuyer sur une touche pour avancer.");
+                            Console.ReadKey();
+                            File.Delete("./temp.bmp");
+                            afficher=false;
+                        }
+                        Console.WriteLine("Souhaitez-vous continuer à modifier votre image ? (1 pour oui et 0 pour non)");
                         fin = Convert.ToBoolean(Convert.ToInt32(Console.ReadLine()));
                         break;
                     case 2 :
