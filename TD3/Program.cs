@@ -86,7 +86,7 @@ namespace TD3
                     case 5:
                         Console.Clear();
                         Console.WriteLine("Nous allons appliquez un filtre pour faire ressortir les countours de l'image :");
-                        image = Filtre(image);
+                        image = Filtre.Convolution(image,1);
                         Console.Clear();
                         Console.WriteLine("Votre image a été modifiée, souhaitez-vous continuer à modifier votre image ? (1 pour oui et 0 pour non)");
                         fin = Convert.ToBoolean(Convert.ToInt32(Console.ReadLine()));
