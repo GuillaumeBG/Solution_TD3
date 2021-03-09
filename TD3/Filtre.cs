@@ -27,7 +27,7 @@ namespace TD3
                     matriceConvultion = new int[,] { { -2, -1, 0 }, { -1, 1, 1 }, { 0, 0, 0 } };
                     break;
             }
-            //NuanceDeGris(image);
+
             Pixel[,] matrice = image.MatriceBGR;
             
             Pixel[,] nouvelleMatrice = new Pixel[matrice.GetLongLength(0), matrice.GetLongLength(1)];

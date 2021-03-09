@@ -177,6 +177,7 @@ namespace TD3
         {
             Pixel[,] matriceBGR = image.MatriceBGR;
             Pixel[,] matriceBGRMiroir = new Pixel[matriceBGR.GetLength(0),matriceBGR.GetLength(1)];
+
             for(int i=0;i<matriceBGR.GetLength(0);i++)
             {
                 for(int j=0;j<matriceBGR.GetLength(1);j++)

@@ -54,29 +54,35 @@ namespace TD3
 
                 this.longueur = Convertir_Endian_To_Int(myfile, 22, 4);
 
-                if (this.largeur % 4 == 0 && this.longueur % 4 == 0)
+                this.nombreBitsParPixel = Convertir_Endian_To_Int(myfile, 28, 2);
+
+                this.matriceBGR = new Pixel[this.longueur, this.largeur];
+
+                this.header = new byte[this.offset];
+
+                for (int i = 0; i < this.offset; i++)
                 {
-                    this.nombreBitsParPixel = Convertir_Endian_To_Int(myfile, 28, 2);
+                    this.header[i] = myfile[i];
+                }
 
-                    this.matriceBGR = new Pixel[this.longueur, this.largeur];
+                int cpt = this.offset;
+                int[] rvb = new int[3];
 
-                    this.header = new byte[this.offset];
-
-                    for (int i = 0; i < this.offset; i++)
+                for (int i = 0; i < this.longueur; i++)
+                {
+                    for (int j = 0; j < this.largeur; j++)
                     {
-                        this.header[i] = myfile[i];
+                        for (int index = 0; index < 3; index++)
+                        {
+                            rvb[index] = myfile[cpt];
+                            cpt++;
+                        }
+                        Pixel temp = new Pixel(rvb);
+                        this.matriceBGR[i, j] = temp;
                     }
-
-                    int index1 = 0;     // premier parametre de la marice
-                    int index2 = 0;     // premier parametre de la marice
-                    int cpt = 0;
-                    for (int i = this.offset; i < this.taille; i+=3)
+                    if ((this.longueur*3) % 4 != 0)
                     {
-                        index2 = cpt % this.largeur;
-                        index1 = cpt / this.largeur;
-                        Pixel temp = new Pixel(myfile[i+2],myfile[i+1],myfile[i]);
-                        this.matriceBGR[index1,index2]=temp;
-                        cpt++;
+                        cpt += (this.longueur*3) % 4;
                     }
                 }
             }
@@ -148,6 +154,7 @@ namespace TD3
         {
             byte[] bytes = new byte[this.taille];
             int index = 0;
+            int bourrage = (this.matriceBGR.GetLength(1)*3) % 4;
             for (int i = 0; i < this.offset; i++)
             {
                 bytes[index] = this.header[i];
@@ -157,11 +164,18 @@ namespace TD3
             {
                 for (int j = 0; j < this.matriceBGR.GetLength(1); j++)
                 {
-                    for (int a = 0; a < 3; a++)
+                    bytes[index] = Convert.ToByte(this.matriceBGR[i, j].B);
+                    index++;
+                    bytes[index] = Convert.ToByte(this.matriceBGR[i, j].V);
+                    index++;
+                    bytes[index] = Convert.ToByte(this.matriceBGR[i, j].R);
+                    index++;
+                }
+                if (bourrage != 0)
+                {
+                    for (int a = 0; a < bourrage; a++)
                     {
-                        bytes[index] = Convert.ToByte(matriceBGR[i, j].B);
-                        bytes[index] = Convert.ToByte(matriceBGR[i, j].V);
-                        bytes[index] = Convert.ToByte(matriceBGR[i, j].R);
+                        bytes[index] = 0x00;
                         index++;
                     }
                 }
